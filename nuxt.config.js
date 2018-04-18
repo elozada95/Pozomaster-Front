@@ -14,7 +14,21 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'vendor/bootstrap/css/bootstrap.min.css' },
+      { rel: 'stylesheet', href: 'vendor/font-awesome/css/font-awesome.min.css' },
+      { rel: 'stylesheet', href: 'css/font.css' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Muli:300,400,700' },
+      { rel: 'stylesheet', href: 'css/style.blue.css', id: 'theme-stylesheet' },
+      { rel: 'stylesheet', href: 'css/custom.css' }
+    ],
+    script: [
+      { src: 'vendor/jquery/jquery.min.js' },
+      { src: 'vendor/popper/umd/popper.min.js' },
+      { src: 'vendor/bootstrap/js/bootstrap.min.js' },
+      { src: 'vendor/jquery-cookie/jquery.cookie.js' },
+      { src: 'vendor/chart/Chart.min.js' },
+      { src: 'vendor/jquery-validation/jquery.validate.min.js' },
     ]
   },
 
@@ -60,7 +74,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
+
     }
   }
 }
