@@ -4,7 +4,7 @@
       <div class="container-fluid d-flex align-items-center justify-content-between">
         <div class="navbar-header">
           <!-- Navbar Header-->
-          <a href="#" class="navbar-brand">
+          <nuxt-link class="navbar-brand" to="/">
             <div class="brand-text brand-big visible text-uppercase">
               <strong class="text-primary">Pozo</strong>
               <strong>Master</strong>
@@ -13,7 +13,7 @@
               <strong class="text-primary">P</strong>
               <strong>M</strong>
             </div>
-          </a>
+          </nuxt-link>
           <!-- Sidebar Toggle Btn-->
           <button class="sidebar-toggle">
             <i class="fa fa-long-arrow-left"></i>

@@ -1,7 +1,13 @@
 const pkg = require('./package')
+const dotenv = require('dotenv').config()
 
 module.exports = {
   mode: 'spa',
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:8080',
+    apiUrl: process.env.API_URL || 'http://localhost:8085/api'
+  },
 
   /*
   ** Headers of the page
@@ -76,5 +82,9 @@ module.exports = {
     extend(config, ctx) {
 
     }
+  },
+
+  router: {
+    linkActiveClass: 'active'
   }
 }
