@@ -1,13 +1,6 @@
 <template>
   <div>
-    <!-- Container Header -->
-    <div class="page-header">
-      <div class="container-fluid">
-        <h2 class="h5 no-margin-bottom">Categories</h2>
-      </div>
-    </div>
-    <!-- End Container Header -->
-
+    <content-header title="Categories"></content-header>
     <section>
       <div class="container-fluid">
         <div class="row">
@@ -38,7 +31,7 @@
             </div>
           </div>
 
-          <!-- Create Category Modal Form -->
+          <!-- Modal Form -->
           <div class="col-lg-4">
             <div class="block">
               <div class="title"><strong>Create a new category</strong></div>
@@ -84,8 +77,7 @@
               </div>
             </div>
           </div>
-          <!-- End Create Category Modal Form-->
-
+          <!-- End Modal Form-->
         </div>
       </div>
     </section>
@@ -94,8 +86,12 @@
 
 <script>
   import axios from 'axios'
+  import ContentHeader from '~/components/ContentHeader.vue'
 
   export default {
+    components: {
+      ContentHeader
+    },
     data() {
       return {
         errors: [],
