@@ -17,7 +17,9 @@
     "bootstrap-vue": "^1.0.2",
     "dotenv": "^5.0.1",
     "express": "^4.15.3",
-    "nuxt": "^1.0.0"
+    "nuxt": "^1.0.0",
+    "nuxt-material-design-icons": "^1.0.4",
+    "sweetalert": "^2.1.0"
   },
   "devDependencies": {
     "cross-env": "^5.0.1",

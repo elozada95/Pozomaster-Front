@@ -1,1 +1,12 @@
 /* your styles go here */
+.transparent-button-primary {
+  border: 0px;
+  background-color: transparent;
+  color: #DB6574;
+}
+
+.transparent-button {
+  border: 0px;
+  background-color: transparent;
+  color: gray;
+}

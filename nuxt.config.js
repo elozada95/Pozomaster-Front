@@ -35,6 +35,7 @@ module.exports = {
       { src: 'vendor/jquery-cookie/jquery.cookie.js' },
       { src: 'vendor/chart/Chart.min.js' },
       { src: 'vendor/jquery-validation/jquery.validate.min.js' },
+      { src: 'js/alert-handling.js' }
     ]
   },
 
@@ -63,6 +64,7 @@ module.exports = {
     '@nuxtjs/axios',
     // Doc: https://bootstrap-vue.js.org/docs/
     // 'bootstrap-vue/nuxt'
+    'nuxt-material-design-icons'
   ],
 
   /*
