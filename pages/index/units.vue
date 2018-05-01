@@ -1,14 +1,14 @@
 <template>
   <div>
-    <content-header title="Categories"></content-header>
+    <content-header title="Units"></content-header>
     <section>
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
             <div class="block margin-bottom-sm">
               <div class="title">
-                <strong>Food Categories</strong>
-                <button class="transparent-button material-icons float-right" @click="editModal(false)" data-toggle="modal" data-target="#categoryModal">add</button>
+                <strong>Food Units</strong>
+                <button class="transparent-button material-icons float-right" @click="editModal(false)" data-toggle="modal" data-target="#unitModal">add</button>
               </div>
               <div class="table-responsive">
                 <table class="table">
@@ -20,13 +20,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="category in categories">
-                      <td>{{ category.id }}</td>
-                      <td>{{ category.name }}</td>
+                    <tr v-for="unit in units">
+                      <td>{{ unit.id }}</td>
+                      <td>{{ unit.name }}</td>
                       <td>
-                        <button type="button" @click="editModal(true); selectCategory(category.id)" data-toggle="modal" data-target="#categoryModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
+                        <button type="button" @click="editModal(true); selectUnit(unit.id)" data-toggle="modal" data-target="#unitModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
                         &nbsp;
-                        <button type="button" @click="deleteCategory(category.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
+                        <button type="button" @click="deleteUnit(unit.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
                       </td>
                     </tr>
                   </tbody>
@@ -35,21 +35,21 @@
             </div>
           </div>
           <!-- Modal-->
-          <div id="categoryModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
+          <div id="unitModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
             <div role="document" class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <strong class="modal-title" v-if="!isEditModal">New Category</strong>
-                  <strong class="modal-title" v-else>Update Category</strong>
+                  <strong class="modal-title" v-if="!isEditModal">New unit</strong>
+                  <strong class="modal-title" v-else>Update unit</strong>
                   <button type="button" @click="closeModal()" class="transparent-button material-icons">close</button>
                 </div>
                 <div class="modal-body">
-                  <p v-if="!isEditModal">Add a new food category.</p>
-                  <p v-else>Update the category.</p>
+                  <p v-if="!isEditModal">Add a new food unit.</p>
+                  <p v-else>Update the unit.</p>
                   <form @submit.prevent="submitAction()">
                     <div class="form-group">
                       <label>Name</label>
-                      <input v-model="category.name" type="text" placeholder="Name" class="form-control" required>
+                      <input v-model="unit.name" type="text" placeholder="Name" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <input v-if="!isEditModal" type="submit" value="Create" class="btn btn-primary">
@@ -82,19 +82,19 @@
     data() {
       return {
         errors: [],
-        categories: [],
-        category: {},
+        units: [],
+        unit: {},
         isEditModal: true,
       }
     },
     mounted() {
-      this.getCategories()
+      this.getUnits()
     },
     methods: {
-      getCategories() {
-        axios.get(process.env.apiUrl + "/categories")
-          .then(categories => {
-            this.categories = categories.data
+      getUnits() {
+        axios.get(process.env.apiUrl + "/units")
+          .then(units => {
+            this.units = units.data
           })
           .catch(err => {
             alertHandling.error(err.response.data.message)
@@ -102,12 +102,12 @@
           })
       },
 
-      createCategory() {
-        axios.post(process.env.apiUrl + "/categories", this.category)
-          .then(category => {
-            this.categories.push(category.data)
+      createUnit() {
+        axios.post(process.env.apiUrl + "/units", this.unit)
+          .then(unit => {
+            this.units.push(unit.data)
             this.closeModal()
-            alertHandling.success("Your new category was created")
+            alertHandling.success("Your new unit was created")
           })
           .catch(err => {
             alertHandling.error(err.response.data.message)
@@ -115,11 +115,11 @@
           })
       },
 
-      selectCategory(categoryId) {
-        axios.get(process.env.apiUrl + "/categories/" + categoryId)
-          .then(category => {
-            this.category = {}
-            this.category = category.data
+      selectUnit(unitId) {
+        axios.get(process.env.apiUrl + "/units/" + unitId)
+          .then(unit => {
+            this.unit = {}
+            this.unit = unit.data
           })
           .catch(err => {
             alertHandling.error(err.response.data.message)
@@ -127,16 +127,16 @@
           })
       },
 
-      updateCategory() {
-        axios.put(process.env.apiUrl + "/categories/" + this.category.id, this.category)
-          .then(category => {
-            for (let i = 0; i < this.categories.length; i++) {
-              if (this.categories[i].id === category.data.id) {
-                this.categories[i] = category.data
+      updateUnit() {
+        axios.put(process.env.apiUrl + "/units/" + this.unit.id, this.unit)
+          .then(unit => {
+            for (let i = 0; i < this.units.length; i++) {
+              if (this.units[i].id === unit.data.id) {
+                this.units[i] = unit.data
               }
             }
             this.closeModal()
-            alertHandling.success("Your category was updated")
+            alertHandling.success("Your unit was updated")
           })
           .catch(err => {
             alertHandling.error(err.response.data.message)
@@ -144,15 +144,15 @@
           })
       },
 
-      deleteCategory(categoryId) {
+      deleteUnit(unitId) {
         let that = this
-        alertHandling.confirm("Are you sure you want to delete this category?", function() {
-          axios.delete(process.env.apiUrl + "/categories/" + categoryId)
+        alertHandling.confirm("Are you sure you want to delete this unit?", function() {
+          axios.delete(process.env.apiUrl + "/units/" + unitId)
             .then(response => {
-              for (let i = 0; i < that.categories.length; i++) {
-                if (that.categories[i].id === categoryId) {
-                  that.categories.splice(i, 1)
-                  alertHandling.success("Your category was removed")
+              for (let i = 0; i < that.units.length; i++) {
+                if (that.units[i].id === unitId) {
+                  that.units.splice(i, 1)
+                  alertHandling.success("Your unit was removed")
                   break;
                 }
               }
@@ -166,10 +166,10 @@
 
       submitAction() {
         if (!this.isEditModal) {
-          this.createCategory()
+          this.createUnit()
         }
         else {
-          this.updateCategory()
+          this.updateUnit()
         }
       },
 
@@ -178,8 +178,8 @@
       },
 
       closeModal() {
-        this.category = {}
-        $('#categoryModal').modal('hide');
+        this.unit = {}
+        $('#unitModal').modal('hide');
       }
     }
   }

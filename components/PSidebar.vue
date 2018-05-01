@@ -16,10 +16,13 @@
       <nuxt-link tag="li" active-class="active" to="/categories">
         <a><i class="icon-list-1"></i>Categories</a>
       </nuxt-link>
+      <nuxt-link tag="li" active-class="active" to="/units">
+        <a><i class="icon-list-1"></i>Units</a>
+      </nuxt-link>
       <nuxt-link tag="li" active-class="active" to="/ingredients">
         <a><i class="icon-list-1"></i>Ingredients</a>
       </nuxt-link>
-      <nuxt-link tag="li" to="/products">
+      <nuxt-link tag="li" active-class="active" to="/products">
         <a><i class="icon-list-1"></i>Products</a>
       </nuxt-link>
     </ul>
