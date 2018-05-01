@@ -24,7 +24,7 @@
                     <tr v-for="ingredient in ingredients">
                       <td>{{ ingredient.id }}</td>
                       <td>{{ ingredient.name }}</td>
-                      <td>{{ ingredient.unitId }}</td>
+                      <td>{{ ingredient.unit.name }}</td>
                       <td>
                         <button type="button" @click="editModal(true); selectIngredient(ingredient.id)" data-toggle="modal" data-target="#ingredientModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
                         &nbsp;
@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                       <label class="form-control-label">Unit</label>
-                      <select name="units" class="form-control" v-model="ingredient.unitId">
+                      <select name="units" class="form-control" v-model="ingredient.unitId" required>
                         <option disabled value="">Please select one</option>
                         <option v-for="unit in units" v-bind:value="unit.id">{{ unit.name }}</option>
                       </select>
@@ -118,6 +118,13 @@
       createIngredient() {
         axios.post(process.env.apiUrl + "/ingredients", this.ingredient)
           .then(ingredient => {
+            ingredient.data.unit = {}
+            ingredient.data.unit.name = ""
+            this.units.forEach(unit => {
+              if (unit.id === ingredient.data.unitId) {
+                ingredient.data.unit.name = unit.name
+              }
+            });
             this.ingredients.push(ingredient.data)
             this.closeModal()
             alertHandling.success("Your new ingredient was created")
