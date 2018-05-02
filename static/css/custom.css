@@ -10,3 +10,47 @@
   background-color: transparent;
   color: gray;
 }
+
+.card-table {
+  width: 100%;
+  border-radius: 3px;
+  font-weight: bold;
+  color: white;
+}
+
+.card-table-orange {
+  background-color: orange;
+}
+
+.card-table-red {
+  background-color: red;
+}
+
+.card-table-blue {
+  background-color: blue;
+}
+
+.card-table-green {
+  background-color: green;
+}
+
+.card-table .title {
+  font-size: 1.5em;
+  text-align: left;
+}
+
+.card-table .description{
+  font-weight: normal;
+  font-size: 1em;
+  text-align: left;
+}
+
+.card-table .icon {
+  position: absolute;
+  top: 8%;
+  right: 8%;
+  /* transform: translate(100%, -80%); */
+  font-size: 4em;
+  color: rgb(73, 67, 67);
+  opacity: 0.5;
+}

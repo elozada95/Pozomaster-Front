@@ -21,7 +21,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="ingredient in ingredients">
+                    <tr v-for="ingredient in ingredients" :key="ingredient.id">
                       <td>{{ ingredient.id }}</td>
                       <td>{{ ingredient.name }}</td>
                       <td>{{ ingredient.unit.name }}</td>
@@ -57,7 +57,7 @@
                       <label class="form-control-label">Unit</label>
                       <select name="units" class="form-control" v-model="ingredient.unitId" required>
                         <option disabled value="">Please select one</option>
-                        <option v-for="unit in units" v-bind:value="unit.id">{{ unit.name }}</option>
+                        <option v-for="unit in units" :key="unit.id" v-bind:value="unit.id">{{ unit.name }}</option>
                       </select>
                     </div>
                     <div class="form-group">

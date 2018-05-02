@@ -20,7 +20,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="category in categories">
+                    <tr v-for="category in categories" :key="category.id">
                       <td>{{ category.id }}</td>
                       <td>{{ category.name }}</td>
                       <td>

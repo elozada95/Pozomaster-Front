@@ -1,32 +1,32 @@
 <template>
   <div>
-    <content-header title="Units"></content-header>
+    <content-header title="Tables"></content-header>
     <section>
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
             <div class="block margin-bottom-sm">
               <div class="title">
-                <strong>Food Units</strong>
-                <button class="transparent-button material-icons float-right" @click="editModal(false)" data-toggle="modal" data-target="#unitModal">add</button>
+                <strong>Tables</strong>
+                <button class="transparent-button material-icons float-right" @click="editModal(false)" data-toggle="modal" data-target="#tableModal">add</button>
               </div>
               <div class="table-responsive">
                 <table class="table">
                   <thead>
                     <tr>
                       <th>#id</th>
-                      <th>Name</th>
+                      <th>Description</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="unit in units" :key="unit.id">
-                      <td>{{ unit.id }}</td>
-                      <td>{{ unit.name }}</td>
+                    <tr v-for="table in tables" :key="table.id">
+                      <td>{{ table.id }}</td>
+                      <td>{{ table.description }}</td>
                       <td>
-                        <button type="button" @click="editModal(true); selectUnit(unit.id)" data-toggle="modal" data-target="#unitModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
+                        <button type="button" @click="editModal(true); selectTable(table.id)" data-toggle="modal" data-target="#tableModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
                         &nbsp;
-                        <button type="button" @click="deleteUnit(unit.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
+                        <button type="button" @click="deleteTable(table.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
                       </td>
                     </tr>
                   </tbody>
@@ -35,21 +35,21 @@
             </div>
           </div>
           <!-- Modal-->
-          <div id="unitModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
+          <div id="tableModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
             <div role="document" class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <strong class="modal-title" v-if="!isEditModal">New unit</strong>
-                  <strong class="modal-title" v-else>Update unit</strong>
+                  <strong class="modal-title" v-if="!isEditModal">New table</strong>
+                  <strong class="modal-title" v-else>Update table</strong>
                   <button type="button" @click="closeModal()" class="transparent-button material-icons">close</button>
                 </div>
                 <div class="modal-body">
-                  <p v-if="!isEditModal">Add a new food unit.</p>
-                  <p v-else>Update the unit.</p>
+                  <p v-if="!isEditModal">Add a new table for the restaurant.</p>
+                  <p v-else>Update the table.</p>
                   <form @submit.prevent="submitAction()">
                     <div class="form-group">
-                      <label>Name</label>
-                      <input v-model="unit.name" type="text" placeholder="Name" class="form-control" required>
+                      <label>Description</label>
+                      <input v-model="table.description" type="text" placeholder="Description" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <input v-if="!isEditModal" type="submit" value="Create" class="btn btn-primary">
@@ -82,19 +82,19 @@
     data() {
       return {
         errors: [],
-        units: [],
-        unit: {},
+        tables: [],
+        table: {},
         isEditModal: true,
       }
     },
     mounted() {
-      this.getUnits()
+      this.getTables()
     },
     methods: {
-      getUnits() {
-        axios.get(process.env.apiUrl + "/units")
-          .then(units => {
-            this.units = units.data
+      getTables() {
+        axios.get(process.env.apiUrl + "/tables")
+          .then(tables => {
+            this.tables = tables.data
           })
           .catch(err => {
             alertHandling.error(err.response.data.message)
@@ -102,12 +102,12 @@
           })
       },
 
-      createUnit() {
-        axios.post(process.env.apiUrl + "/units", this.unit)
-          .then(unit => {
-            this.units.push(unit.data)
+      createTable() {
+        axios.post(process.env.apiUrl + "/tables", this.table)
+          .then(table => {
+            this.tables.push(table.data)
             this.closeModal()
-            alertHandling.success("Your new unit was created")
+            alertHandling.success("Your new table was created")
           })
           .catch(err => {
             alertHandling.error(err.response.data.message)
@@ -115,11 +115,11 @@
           })
       },
 
-      selectUnit(unitId) {
-        axios.get(process.env.apiUrl + "/units/" + unitId)
-          .then(unit => {
-            this.unit = {}
-            this.unit = unit.data
+      selectTable(tableId) {
+        axios.get(process.env.apiUrl + "/tables/" + tableId)
+          .then(table => {
+            this.table = {}
+            this.table = table.data
           })
           .catch(err => {
             alertHandling.error(err.response.data.message)
@@ -127,16 +127,16 @@
           })
       },
 
-      updateUnit() {
-        axios.put(process.env.apiUrl + "/units/" + this.unit.id, this.unit)
-          .then(unit => {
-            for (let i = 0; i < this.units.length; i++) {
-              if (this.units[i].id === unit.data.id) {
-                this.units[i] = unit.data
+      updateTable() {
+        axios.put(process.env.apiUrl + "/tables/" + this.table.id, this.table)
+          .then(table => {
+            for (let i = 0; i < this.tables.length; i++) {
+              if (this.tables[i].id === table.data.id) {
+                this.tables[i] = table.data
               }
             }
             this.closeModal()
-            alertHandling.success("Your unit was updated")
+            alertHandling.success("Your table was updated")
           })
           .catch(err => {
             alertHandling.error(err.response.data.message)
@@ -144,15 +144,15 @@
           })
       },
 
-      deleteUnit(unitId) {
+      deleteTable(tableId) {
         let that = this
-        alertHandling.confirm("Are you sure you want to delete this unit?", function() {
-          axios.delete(process.env.apiUrl + "/units/" + unitId)
+        alertHandling.confirm("Are you sure you want to delete this table?", function() {
+          axios.delete(process.env.apiUrl + "/tables/" + tableId)
             .then(response => {
-              for (let i = 0; i < that.units.length; i++) {
-                if (that.units[i].id === unitId) {
-                  that.units.splice(i, 1)
-                  alertHandling.success("Your unit was removed")
+              for (let i = 0; i < that.tables.length; i++) {
+                if (that.tables[i].id === tableId) {
+                  that.tables.splice(i, 1)
+                  alertHandling.success("Your table was removed")
                   break;
                 }
               }
@@ -166,10 +166,10 @@
 
       submitAction() {
         if (!this.isEditModal) {
-          this.createUnit()
+          this.createTable()
         }
         else {
-          this.updateUnit()
+          this.updateTable()
         }
       },
 
@@ -178,8 +178,8 @@
       },
 
       closeModal() {
-        this.unit = {}
-        $('#unitModal').modal('hide');
+        this.table = {}
+        $('#tableModal').modal('hide');
       }
     }
   }

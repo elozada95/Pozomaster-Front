@@ -11,19 +11,28 @@
       </div>
     </div>
     <!-- Sidebar Navidation Menus-->
-    <span class="heading">CRUD</span>
+    <span class="heading">ORDER</span>
+    <ul class="list-unstyled">
+      <nuxt-link tag="li" active-class="active" to="/orders">
+        <a><i class="material-icons">room_service</i>Orders</a>
+      </nuxt-link>
+    </ul>
+    <span class="heading">MANAGE</span>
     <ul class="list-unstyled">
       <nuxt-link tag="li" active-class="active" to="/categories">
-        <a><i class="icon-list-1"></i>Categories</a>
+        <a><i class="material-icons">list</i>Categories</a>
       </nuxt-link>
       <nuxt-link tag="li" active-class="active" to="/units">
-        <a><i class="icon-list-1"></i>Units</a>
+        <a><i class="material-icons">straighten</i>Units</a>
+      </nuxt-link>
+      <nuxt-link tag="li" active-class="active" to="/tables">
+        <a><i class="material-icons">dashboard</i>Tables</a>
       </nuxt-link>
       <nuxt-link tag="li" active-class="active" to="/ingredients">
-        <a><i class="icon-list-1"></i>Ingredients</a>
+        <a><i class="material-icons">kitchen</i>Ingredients</a>
       </nuxt-link>
       <nuxt-link tag="li" active-class="active" to="/products">
-        <a><i class="icon-list-1"></i>Products</a>
+        <a><i class="material-icons">local_drink</i>Products</a>
       </nuxt-link>
     </ul>
   </nav>
