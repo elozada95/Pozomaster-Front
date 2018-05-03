@@ -34,6 +34,9 @@
       <nuxt-link tag="li" active-class="active" to="/products">
         <a><i class="material-icons">local_drink</i>Products</a>
       </nuxt-link>
+      <nuxt-link tag="li" active-class="active" to="/stocks">
+        <a><i class="material-icons">pie_chart_outlined</i>Stocks</a>
+      </nuxt-link>
     </ul>
   </nav>
 </template>
