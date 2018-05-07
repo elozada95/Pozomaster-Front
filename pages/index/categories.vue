@@ -24,9 +24,9 @@
                       <td>{{ category.id }}</td>
                       <td>{{ category.name }}</td>
                       <td>
-                        <button type="button" @click="editModal(true); selectCategory(category.id)" data-toggle="modal" data-target="#categoryModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
+                        <button type="button" @click="editModal(true); selectCategory(category.id)" data-toggle="modal" data-target="#categoryModal" class="transparent-button material-icons">edit</button>
                         &nbsp;
-                        <button type="button" @click="deleteCategory(category.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
+                        <button type="button" @click="deleteCategory(category.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>
                   </tbody>

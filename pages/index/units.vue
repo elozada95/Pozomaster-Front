@@ -24,9 +24,9 @@
                       <td>{{ unit.id }}</td>
                       <td>{{ unit.name }}</td>
                       <td>
-                        <button type="button" @click="editModal(true); selectUnit(unit.id)" data-toggle="modal" data-target="#unitModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
+                        <button type="button" @click="editModal(true); selectUnit(unit.id)" data-toggle="modal" data-target="#unitModal" class="transparent-button material-icons">edit</button>
                         &nbsp;
-                        <button type="button" @click="deleteUnit(unit.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
+                        <button type="button" @click="deleteUnit(unit.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>
                   </tbody>

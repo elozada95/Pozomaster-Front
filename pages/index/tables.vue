@@ -24,9 +24,9 @@
                       <td>{{ table.id }}</td>
                       <td>{{ table.description }}</td>
                       <td>
-                        <button type="button" @click="editModal(true); selectTable(table.id)" data-toggle="modal" data-target="#tableModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
+                        <button type="button" @click="editModal(true); selectTable(table.id)" data-toggle="modal" data-target="#tableModal" class="transparent-button material-icons">edit</button>
                         &nbsp;
-                        <button type="button" @click="deleteTable(table.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
+                        <button type="button" @click="deleteTable(table.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>
                   </tbody>

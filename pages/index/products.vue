@@ -28,9 +28,9 @@
                       <td>{{ product.price }}</td>
                       <td>{{ product.category.name }}</td>
                       <td>
-                        <button type="button" @click="editModal(true); selectProduct(product.id)" data-toggle="modal" data-target="#productModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
+                        <button type="button" @click="editModal(true); selectProduct(product.id)" data-toggle="modal" data-target="#productModal" class="transparent-button material-icons">edit</button>
                         &nbsp;
-                        <button type="button" @click="deleteProduct(product.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
+                        <button type="button" @click="deleteProduct(product.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>
                   </tbody>

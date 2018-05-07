@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row">
           <button v-for="table in tables" :key="table.id" @click="goToOrder(table)" class="col-lg-4 transparent-button">
-            <div v-if="table.orders.length" class="block margin-bottom-sm card-table card-table-red">
+            <div v-if="table.currentOrder" class="block margin-bottom-sm card-table card-table-red">
               <div class="title">Table {{ table.id }}</div>
               <div class="description">Occupied</div>
               <i class="icon material-icons">layers_clear</i>
@@ -47,14 +47,13 @@
           .then(tables => {
             tables.data.forEach(table => {
               table.currentOrder = null
-              if (table.orders.lenght) {
-                if (!table.orders[0].completedDate) {
+              if (table.orders.length) {
+                if (table.orders[0].completedDate === null) {
                   table.currentOrder = table.orders[0].id
                 }
               }
             });
             this.tables = tables.data
-
           })
           .catch(err => {
             alertHandling.error(err.response.data.message)
@@ -64,7 +63,7 @@
 
       goToOrder(table) {
         let that = this
-        if (table.orders.length) {
+        if (table.currentOrder) {
           this.$router.push('/orders/' + table.orders[0].id)
         }
         else {

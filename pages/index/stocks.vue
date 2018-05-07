@@ -18,6 +18,7 @@
                       <th>Ingredient</th>
                       <th>Quantity</th>
                       <th>Unit</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -31,9 +32,9 @@
                         </div>
                       </div>
                       <td>
-                        <button type="button" @click="editModal(true); selectStock(stock.id)" data-toggle="modal" data-target="#ingredientModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
+                        <button type="button" @click="editModal(true); selectStock(stock.id)" data-toggle="modal" data-target="#ingredientModal" class="transparent-button material-icons">edit</button>
                         &nbsp;
-                        <button type="button" @click="deleteStock(stock.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
+                        <button type="button" @click="deleteStock(stock.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>
                   </tbody>

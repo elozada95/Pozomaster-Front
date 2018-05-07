@@ -26,9 +26,9 @@
                       <td>{{ ingredient.name }}</td>
                       <td>{{ ingredient.unit.name }}</td>
                       <td>
-                        <button type="button" @click="editModal(true); selectIngredient(ingredient.id)" data-toggle="modal" data-target="#ingredientModal" class="btn btn-sm btn-primary"><span class="material-icons">edit</span></button>
+                        <button type="button" @click="editModal(true); selectIngredient(ingredient.id)" data-toggle="modal" data-target="#ingredientModal" class="transparent-button material-icons">edit</button>
                         &nbsp;
-                        <button type="button" @click="deleteIngredient(ingredient.id)" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
+                        <button type="button" @click="deleteIngredient(ingredient.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>
                   </tbody>
