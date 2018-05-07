@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("andresreymaz/aurora-api")
+        app = docker.build("juanfg/nuxt")
     }
 
     stage('Test image') {
