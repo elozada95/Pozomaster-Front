@@ -5,6 +5,7 @@ node {
   }
 
   stage('Build image') {
-    app = docker.build("juanfg/nuxt")
+    sh 'npm install'
+    sh 'npm start'
   }
 }
