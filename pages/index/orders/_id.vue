@@ -3,20 +3,55 @@
     <div class="page-header">
       <div class="container-fluid" style="display: inline-block;">
         <h2 class="float-left h5 no-margin-bottom">{{ title }}</h2>
-        <button class="h5 transparent-button float-right no-margin-bottom" @click="completeOrder()">Go to pay: ${{ total }}</button>
+        <button class="h5 transparent-button float-right no-margin-bottom" data-toggle="modal" data-target="#orderModal">Go to pay: ${{ total }}</button>
       </div>
     </div>
+    <!-- Modal for complete check -->
+      <div id="orderModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
+        <div role="document" class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <strong class="modal-title">Total to pay: ${{ total }}</strong>
+              <button type="button" @click="closeModal()" class="transparent-button material-icons">close</button>
+            </div>
+            <form @submit.prevent="closeModal()">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Amount received:</label>
+                  <input v-model="amountReceived" type="number" placeholder="$0.0" class="form-control" min="0" required>
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Change:</label>
+                  <input type="number" placeholder="$0.0" min="0" :value="amountReceived - total" class="form-control" disabled>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="col-md-12" style="display: inline-block;">
+                  <button type="submit" @click="completeOrder()" class="transparent-button center-button material-icons">check</button>
+                  <p class="small-text">Complete Order</p>
+                </div>
+              </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" @click="closeModal()" class="btn btn-secondary">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- End Modal Form-->
     <section>
       <div class="container-fluid">
         <div class="row">
-          <button v-for="product in products" :key="product.id" class="col-lg-2 transparent-button" @click="selectProduct(product)" data-toggle="modal" data-target="#productModal">
+          <button v-for="product in products" :key="product.id" class="col-lg-2 transparent-button" @click="selectProduct(product, false)" data-toggle="modal" data-target="#productModal">
             <div class="block margin-bottom-sm">
               <div class="title">{{ product.name }}</div>
             </div>
           </button>
         </div>
       </div>
-       <!-- Modal-->
+       <!-- Modal for alter the products in check-->
       <div id="productModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
         <div role="document" class="modal-dialog">
           <div class="modal-content">
@@ -43,7 +78,8 @@
               </div>
               <div class="modal-footer">
                 <div class="col-md-12" style="display: inline-block;">
-                  <button type="submit" @click="addProduct()" class="transparent-button center-button material-icons">send</button>
+                  <button type="submit" v-if="!isUpdate" @click="addProduct()" class="transparent-button center-button material-icons">send</button>
+                  <button type="submit" v-else @click="updateProduct()" class="transparent-button center-button material-icons">send</button>
                   <p class="small-text">Send to Check</p>
                 </div>
               </div>
@@ -69,22 +105,21 @@
                       <th>Price per unit</th>
                       <th>Quantity</th>
                       <th>Price</th>
-                      <th>Actions</th>
+                      <th>Edit</th>
                       <th>Remove</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="product in productsInCheck" :key="product.key">
+                    <tr v-for="product in productsInCheck" :key="product.id">
                       <td>{{ product.name }}</td>
                       <td>${{ product.price }}</td>
                       <td>{{ product.quantity }}</td>
                       <td>${{ (+(product.quantity * product.price)).toFixed(2) }}</td>
                       <td>
-                        <button type="button" @click="selectProduct(product)" class="transparent-button material-icons" data-toggle="modal" data-target="#productModal">remove_circle_outline</button>
-                        <button type="button" @click="decreaseProduct(product.id)" class="transparent-button material-icons">add_circle_outline</button>
+                        <button type="button" @click="selectProduct(product, true)" class="transparent-button material-icons" data-toggle="modal" data-target="#productModal">edit</button>
                       </td>
                       <td>
-                        <button type="button" class="transparent-button material-icons">delete</button>
+                        <button type="button" @click="deleteProduct(product.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>
                   </tbody>
@@ -101,6 +136,7 @@
 <script>
   import axios from 'axios'
   import ContentHeader from '~/components/ContentHeader'
+  import { ENGINE_METHOD_DIGESTS } from 'constants';
   const alertHandling = require('~/static/js/alert-handling.js')
 
   export default {
@@ -117,7 +153,9 @@
         },
         productsInCheck: [],
         total: 0,
-        title: `Order #${this.$route.params.id}`
+        title: `Order #${this.$route.params.id}`,
+        isUpdate: false,
+        amountReceived: ""
       }
     },
     mounted() {
@@ -149,7 +187,8 @@
           })
       },
 
-      selectProduct(product) {
+      selectProduct(product, isUpdatingProduct) {
+        this.isUpdate = isUpdatingProduct
         if (product.quantity) {
           this.product.quantity = product.quantity
         }
@@ -158,8 +197,7 @@
       },
 
       addProduct() {
-        if (this.product.quantity)
-        axios.post(process.env.apiUrl + '/orderProduct/' + this.$route.params.id, this.product)
+        axios.post(process.env.apiUrl + '/orderProduct/order/' + this.$route.params.id, this.product)
           .then(result => {
             this.addToCheck(result.data.product, result.data.quantity)
           })
@@ -169,22 +207,56 @@
           })
       },
 
-      addToCheck(newProduct, quantity) {
-        let price = quantity * parseFloat(newProduct.price)
-        this.total = (+(parseFloat(this.total) + price)).toFixed(2)
+      updateProduct() {
+        axios.put(process.env.apiUrl + '/orderProduct/order/' + this.$route.params.id, this.product)
+          .then(result => {
+            this.addToCheck(result.data.product, result.data.quantity)
+          })
+          .catch(err => {
+            alertHandling.error(err.response.data.message)
+            this.errors.push(err)
+          })
+      },
 
+      deleteProduct(productId) {
+        let that = this
+        alertHandling.confirm("Are you sure you want to delete this product in the check?", function() {
+          axios.delete(process.env.apiUrl + '/orderProduct/order/' + that.$route.params.id + '/product/' + productId)
+            .then(response => {
+              for (let i = 0; i < that.productsInCheck.length; i++) {
+                if (that.productsInCheck[i].id === productId) {
+                  that.productsInCheck.splice(i, 1)
+                  alertHandling.success("Your product was removed from the check")
+                  break;
+                }
+              }
+            })
+            .catch(err => {
+              alertHandling.error(err.response.data.message)
+              that.errors.push(err)
+            })
+        })
+      },
+
+      addToCheck(newProduct, quantity) {
         let productAlreadyInCheck = false
+        newProduct.quantity = quantity
         this.productsInCheck.forEach(product => {
           if (product.id === newProduct.id) {
-            product.quantity = product.quantity + quantity
+            let substractToTotal = (parseFloat(product.quantity) * parseFloat(product.price))
+            this.total = (+(parseFloat(this.total) - substractToTotal)).toFixed(2)
+            console.log(substractToTotal)
+            product.quantity = newProduct.quantity
             productAlreadyInCheck = true
           }
         })
 
         if (!productAlreadyInCheck) {
-          newProduct.quantity = quantity
           this.productsInCheck.push(newProduct)
         }
+
+        let price = parseFloat(newProduct.quantity) * parseFloat(newProduct.price)
+        this.total = (+(parseFloat(this.total) + price)).toFixed(2)
       },
 
       completeOrder() {
@@ -209,11 +281,13 @@
       },
 
       closeModal() {
+        $('#productModal').modal('hide');
+        $('#orderModal').modal('hide');
         this.product = {
           name: "",
           quantity: 1
         }
-        $('#productModal').modal('hide');
+        amountReceived = 0
       }
     }
   }
