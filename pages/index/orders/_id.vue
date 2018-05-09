@@ -287,7 +287,7 @@
           name: "",
           quantity: 1
         }
-        amountReceived = 0
+        this.amountReceived = 0
       }
     }
   }
