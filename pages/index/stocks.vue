@@ -18,6 +18,8 @@
                       <th>Ingredient</th>
                       <th>Quantity</th>
                       <th>Unit</th>
+                      <th>Purchase Date</th>
+                      <th>Updated Date</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -31,6 +33,8 @@
                           <td>{{ unit.name }}</td>
                         </div>
                       </div>
+                      <td>{{ stock.createdAt }}</td>
+                      <td>{{ stock.updatedAt }}</td>
                       <td>
                         <button type="button" @click="editModal(true); selectStock(stock.id)" data-toggle="modal" data-target="#ingredientModal" class="transparent-button material-icons">edit</button>
                         &nbsp;
@@ -87,6 +91,7 @@
 
 <script>
   import axios from 'axios'
+  import moment from 'moment'
   import ContentHeader from '~/components/ContentHeader.vue'
   const alertHandling = require('~/static/js/alert-handling.js')
 
@@ -118,6 +123,10 @@
       getStocks() {
         axios.get(process.env.apiUrl + "/stocks")
           .then(stocks => {
+            stocks.data.forEach(stock => {
+              stock.createdAt = moment(stock.createdAt).format("MMMM Do YYYY, h:mm:ss a")
+              stock.updatedAt = moment(stock.updatedAt).format("MMMM Do YYYY, h:mm:ss a")
+            });
             this.stocks = stocks.data
           })
           .catch(err => {
@@ -136,6 +145,8 @@
                 stock.data.ingredient.name = ingredient.name
               }
             });
+            stock.data.createdAt = moment(stock.createdAt).format("MMMM Do YYYY, h:mm:ss a")
+            stock.data.updatedAt = moment(stock.updatedAt).format("MMMM Do YYYY, h:mm:ss a")
             this.stocks.push(stock.data)
             this.closeModal()
             alertHandling.success("Your new stock was created")
@@ -163,6 +174,8 @@
           .then(stock => {
             for (let i = 0; i < this.stocks.length; i++) {
               if (this.stocks[i].id === stock.data.id) {
+                stock.data.createdAt = moment(stock.createdAt).format("MMMM Do YYYY, h:mm:ss a")
+                stock.data.updatedAt = moment(stock.updatedAt).format("MMMM Do YYYY, h:mm:ss a")
                 this.stocks[i] = stock.data
               }
             }

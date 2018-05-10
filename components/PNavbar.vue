@@ -21,9 +21,9 @@
         </div>
         <!-- Log out               -->
         <div class="list-inline-item logout">
-          <a id="logout" href="#" class="nav-link">Logout
+          <!-- <a id="logout" href="#" class="nav-link">Logout
             <i class="icon-logout"></i>
-          </a>
+          </a> -->
         </div>
       </div>
     </nav>
