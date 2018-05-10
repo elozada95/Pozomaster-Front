@@ -43,10 +43,11 @@
     <!-- End Modal Form-->
     <section>
       <div class="container-fluid">
-        <div class="row">
-          <button v-for="product in products" :key="product.id" class="col-lg-2 transparent-button" @click="selectProduct(product, false)" data-toggle="modal" data-target="#productModal">
-            <div class="block margin-bottom-sm">
+        <div class="cards">
+          <button v-for="product in products" :key="product.id" class="transparent-button card card-table card-table-orange" @click="selectProduct(product, false)" data-toggle="modal" data-target="#productModal">
+            <div class="card-content">
               <div class="title">{{ product.name }}</div>
+              <div class="description"><span style="font-weight: bold;">Price:</span> ${{ product.price }}</div>
             </div>
           </button>
         </div>
