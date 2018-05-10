@@ -32,6 +32,7 @@
     "bootstrap-vue": "^1.0.2",
     "dotenv": "^5.0.1",
     "express": "^4.15.3",
+    "moment": "^2.22.1",
     "nuxt": "^1.0.0",
     "nuxt-material-design-icons": "^1.0.4",
     "sweetalert": "^2.1.0"
