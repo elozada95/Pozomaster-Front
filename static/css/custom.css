@@ -13,7 +13,12 @@
 
 .card {
 	background: white;
-	margin-bottom: 2em;
+  margin-bottom: 2em;
+}
+
+.margin-sides-sm {
+  margin-right: 15px !important;
+  margin-left: 15px !important;
 }
 
 .card a {

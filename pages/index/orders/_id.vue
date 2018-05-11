@@ -44,7 +44,7 @@
     <section>
       <div class="container-fluid">
         <div class="cards">
-          <button v-for="product in products" :key="product.id" class="transparent-button card card-table card-table-orange" @click="selectProduct(product, false)" data-toggle="modal" data-target="#productModal">
+          <button v-for="product in products" :key="product.id" class="margin-bottom-sm margin-sides-sm transparent-button col-sm-3 card-table card-table-orange" @click="selectProduct(product, false)" data-toggle="modal" data-target="#productModal">
             <div class="card-content">
               <div class="title">{{ product.name }}</div>
               <div class="description"><span style="font-weight: bold;">Price:</span> ${{ product.price }}</div>

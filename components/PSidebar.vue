@@ -16,6 +16,9 @@
       <nuxt-link tag="li" active-class="active" to="/orders">
         <a><i class="material-icons">room_service</i>Orders</a>
       </nuxt-link>
+      <nuxt-link tag="li" active-class="active" to="/ordersRecord">
+        <a><i class="material-icons">attach_money</i>Record</a>
+      </nuxt-link>
     </ul>
     <span class="heading">PURCHASES</span>
     <ul class="list-unstyled">
