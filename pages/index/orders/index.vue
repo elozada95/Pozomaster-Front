@@ -73,7 +73,6 @@
             }
             axios.post(process.env.apiUrl + "/orders", newOrder)
               .then(order => {
-                console.log(order.data.id)
                 that.$router.push('/orders/' + order.data.id)
               })
               .catch(err => {
