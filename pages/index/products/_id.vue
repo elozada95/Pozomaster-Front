@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                   <label>Quantity</label>
-                  <input v-model="ingredient.quantity" type="number" placeholder="Quantity" class="form-control" min="1" required>
+                  <input v-model="ingredient.quantity" type="number" placeholder="Quantity" class="form-control" min="0" step="0.01" required>
                 </div>
                 <div class="form-group">
                   <input v-if="!isEditModal" type="submit" value="Add" class="btn btn-primary">
@@ -145,6 +145,7 @@
       },
 
       addIngredientToProduct() {
+        console.log(this.ingredient)
         axios.post(process.env.apiUrl + '/ingredientProduct/product/' + this.$route.params.id, this.ingredient)
           .then(result => {
             this.ingredientProduct.push(result.data)
