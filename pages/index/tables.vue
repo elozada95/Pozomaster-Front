@@ -16,7 +16,8 @@
                     <tr>
                       <th>#id</th>
                       <th>Description</th>
-                      <th>Actions</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -25,7 +26,8 @@
                       <td>{{ table.description }}</td>
                       <td>
                         <button type="button" @click="editModal(true); selectTable(table.id)" data-toggle="modal" data-target="#tableModal" class="transparent-button material-icons">edit</button>
-                        &nbsp;
+                      </td>
+                      <td>
                         <button type="button" @click="deleteTable(table.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <content-header title="Stocks"></content-header>
+    <content-header title="Purchases"></content-header>
     <section>
       <div class="container-fluid">
         <div class="row">
@@ -20,7 +20,8 @@
                       <th>Unit</th>
                       <th>Purchase Date</th>
                       <th>Updated Date</th>
-                      <th>Actions</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -28,16 +29,19 @@
                       <td>{{ stock.id }}</td>
                       <td>{{ stock.ingredient.name }}</td>
                       <td>{{ stock.quantity }}</td>
-                      <div v-for="unit in units" :key="unit.id">
-                        <div v-if="stock.ingredient.unitId === unit.id">
-                          <td>{{ unit.name }}</td>
+                      <td>
+                        <div v-for="unit in units" :key="unit.id">
+                          <div v-if="stock.ingredient.unitId === unit.id">
+                            {{ unit.name }}
+                          </div>
                         </div>
-                      </div>
+                      </td>
                       <td>{{ stock.createdAt }}</td>
                       <td>{{ stock.updatedAt }}</td>
                       <td>
                         <button type="button" @click="editModal(true); selectStock(stock.id)" data-toggle="modal" data-target="#ingredientModal" class="transparent-button material-icons">edit</button>
-                        &nbsp;
+                      </td>
+                      <td>
                         <button type="button" @click="deleteStock(stock.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>

@@ -54,7 +54,7 @@
                       <th>Ingredient</th>
                       <th>Quantity</th>
                       <th>Edit</th>
-                      <th>Remove</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>

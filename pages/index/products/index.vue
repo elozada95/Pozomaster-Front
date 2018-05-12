@@ -18,7 +18,8 @@
                       <th>Name</th>
                       <th>Price</th>
                       <th>Category</th>
-                      <th>Actions</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -29,7 +30,8 @@
                       <td>{{ product.category.name }}</td>
                       <td>
                         <button type="button" @click="editModal(true); selectProduct(product.id)" data-toggle="modal" data-target="#productModal" class="transparent-button material-icons">edit</button>
-                        &nbsp;
+                      </td>
+                      <td>
                         <button type="button" @click="deleteProduct(product.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>

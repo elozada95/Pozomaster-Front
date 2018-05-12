@@ -17,7 +17,8 @@
                       <th>#id</th>
                       <th>Name</th>
                       <th>Unit</th>
-                      <th>Actions</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -27,7 +28,8 @@
                       <td>{{ ingredient.unit.name }}</td>
                       <td>
                         <button type="button" @click="editModal(true); selectIngredient(ingredient.id)" data-toggle="modal" data-target="#ingredientModal" class="transparent-button material-icons">edit</button>
-                        &nbsp;
+                      </td>
+                      <td>
                         <button type="button" @click="deleteIngredient(ingredient.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>

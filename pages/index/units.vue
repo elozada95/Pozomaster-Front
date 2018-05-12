@@ -7,7 +7,7 @@
           <div class="col-lg-12">
             <div class="block margin-bottom-sm">
               <div class="title">
-                <strong>Food Units</strong>
+                <strong>Ingredient Units</strong>
                 <button class="transparent-button material-icons float-right" @click="editModal(false)" data-toggle="modal" data-target="#unitModal">add</button>
               </div>
               <div class="table-responsive">
@@ -16,7 +16,8 @@
                     <tr>
                       <th>#id</th>
                       <th>Name</th>
-                      <th>Actions</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -25,7 +26,8 @@
                       <td>{{ unit.name }}</td>
                       <td>
                         <button type="button" @click="editModal(true); selectUnit(unit.id)" data-toggle="modal" data-target="#unitModal" class="transparent-button material-icons">edit</button>
-                        &nbsp;
+                      </td>
+                      <td>
                         <button type="button" @click="deleteUnit(unit.id)" class="transparent-button material-icons">delete</button>
                       </td>
                     </tr>
