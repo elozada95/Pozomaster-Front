@@ -26,7 +26,7 @@
                     <tr v-for="product in products" :key="product.id">
                       <td>{{ product.id }}</td>
                       <td @click="goToProduct(product.id)">{{ product.name }}</td>
-                      <td>{{ product.price }}</td>
+                      <td>${{ product.price }}</td>
                       <td>{{ product.category.name }}</td>
                       <td>
                         <button type="button" @click="editModal(true); selectProduct(product.id)" data-toggle="modal" data-target="#productModal" class="transparent-button material-icons">edit</button>
